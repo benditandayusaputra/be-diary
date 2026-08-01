@@ -57,6 +57,7 @@
 	</div>
 {:else}
 	<div
+		class="panel-gelap"
 		style="display:flex;flex-direction:column;gap:var(--s-4);padding:var(--s-5);border:1px solid rgb(255 255 255 / 0.12);background:#101315"
 	>
 		<div

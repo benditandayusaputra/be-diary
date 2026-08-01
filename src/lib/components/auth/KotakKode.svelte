@@ -50,9 +50,9 @@
 					? 'var(--pin-brass)'
 					: 'var(--accent)'
 				: gelap
-					? 'rgb(255 255 255 / 0.3)'
+					? 'var(--garis-ruang-kuat)'
 					: 'rgb(27 27 23 / 0.45)'};background:{gelap
-				? 'rgb(255 255 255 / 0.03)'
+				? 'var(--isi-ruang)'
 				: 'transparent'};font-family:var(--f-data);font-size:var(--text-lg);color:{gelap
 				? 'var(--ink-on-board)'
 				: 'var(--ink)'};outline:none"

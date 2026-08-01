@@ -32,13 +32,13 @@
 	</div>
 
 	<div
-		style="display:flex;flex-wrap:wrap;gap:var(--s-6);align-items:center;padding:var(--s-5);border:1px solid rgb(255 255 255 / 0.1);border-radius:var(--r-control)"
+		style="display:flex;flex-wrap:wrap;gap:var(--s-6);align-items:center;padding:var(--s-5);border:1px solid var(--garis-ruang);border-radius:var(--r-control)"
 	>
 		<div style="display:flex;align-items:center;gap:var(--s-4)">
 			<button
 				type="button"
 				aria-label="Saklar Malam atau Siang"
-				style="cursor:pointer;width:40px;height:62px;padding:5px;border:1px solid rgb(255 255 255 / 0.18);border-radius:var(--r-control);background:linear-gradient(#2A2F33,#1D2124);box-shadow:inset 0 1px 0 rgb(255 255 255 / 0.1);display:flex;align-items:{tema.mode ===
+				style="cursor:pointer;width:40px;height:62px;padding:5px;border:1px solid var(--garis-ruang);border-radius:var(--r-control);background:linear-gradient(#2A2F33,#1D2124);box-shadow:inset 0 1px 0 var(--garis-ruang);display:flex;align-items:{tema.mode ===
 				'malam'
 					? 'flex-end'
 					: 'flex-start'}"

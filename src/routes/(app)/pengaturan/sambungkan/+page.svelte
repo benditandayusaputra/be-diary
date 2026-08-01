@@ -81,7 +81,7 @@
 		</div>
 
 		<div style="width:min(320px, 100%);display:flex;flex-direction:column;gap:8px;align-items:center">
-			<div style="width:100%;height:3px;background:rgb(255 255 255 / 0.1)">
+			<div style="width:100%;height:3px;background:var(--garis-ruang)">
 				<div style="width:{persen};height:100%;background:{warnaBar};transition:width 1s linear"></div>
 			</div>
 			<span class="t-data">Berlaku {sisa} detik lagi</span>
@@ -100,7 +100,7 @@
 		{#if tampilManual}
 			<div
 				data-testid="kode-manual"
-				style="max-width:520px;padding:var(--s-4);border:1px solid rgb(255 255 255 / 0.14);border-radius:var(--r-control);font-family:var(--f-data);font-size:var(--text-sm);line-height:1.7;color:var(--ink-on-board);word-break:break-all"
+				style="max-width:520px;padding:var(--s-4);border:1px solid var(--garis-ruang);border-radius:var(--r-control);font-family:var(--f-data);font-size:var(--text-sm);line-height:1.7;color:var(--ink-on-board);word-break:break-all"
 			>
 				{manual}
 			</div>

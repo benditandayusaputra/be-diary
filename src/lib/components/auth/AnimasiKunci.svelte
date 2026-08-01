@@ -47,7 +47,7 @@
 		<span class="t-data">{i18n.t.auth.kdfInfo(kdf.time, Math.round(kdf.memKib / 1024))}</span>
 	</div>
 
-	<div style="width:220px;height:3px;background:rgb(255 255 255 / 0.1)">
+	<div style="width:220px;height:3px;background:var(--garis-ruang)">
 		<div
 			style="width:{progres};height:100%;background:var(--pin-brass);transition:width var(--dur-slow) var(--ease-quiet)"
 		></div>

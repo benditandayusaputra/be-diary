@@ -26,7 +26,7 @@
 		{@render children()}
 
 		<footer
-			style="margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid rgb(255 255 255 / 0.1);display:flex;flex-direction:column;gap:var(--s-3)"
+			style="margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--garis-ruang);display:flex;flex-direction:column;gap:var(--s-3)"
 		>
 			<p
 				style="margin:0;max-width:62ch;font-family:var(--f-read);font-size:var(--text-sm);line-height:1.7;color:var(--ink-on-board-dim);text-wrap:pretty"

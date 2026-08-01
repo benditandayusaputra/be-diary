@@ -30,7 +30,7 @@
 		{@render children()}
 
 		<footer
-			style="margin-top:var(--s-9);padding-top:var(--s-5);border-top:1px solid rgb(255 255 255 / 0.1);display:flex;flex-wrap:wrap;gap:var(--s-4);justify-content:space-between"
+			style="margin-top:var(--s-9);padding-top:var(--s-5);border-top:1px solid var(--garis-ruang);display:flex;flex-wrap:wrap;gap:var(--s-4);justify-content:space-between"
 		>
 			<span class="t-data">AGPL-3.0-or-later · kode terbuka</span>
 			<div style="display:flex;gap:var(--s-4);flex-wrap:wrap">

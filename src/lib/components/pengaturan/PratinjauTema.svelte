@@ -16,7 +16,7 @@
 	aria-pressed={aktif}
 	style="cursor:pointer;padding:8px;border:2px solid {aktif
 		? 'var(--pin-brass)'
-		: 'rgb(255 255 255 / 0.1)'};border-radius:var(--r-control);background:rgb(255 255 255 / 0.03);display:flex;flex-direction:column;gap:10px;text-align:left"
+		: 'var(--garis-ruang)'};border-radius:var(--r-control);background:var(--isi-ruang);display:flex;flex-direction:column;gap:10px;text-align:left"
 	onclick={() => onpilih(def.id)}
 >
 	<div

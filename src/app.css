@@ -301,9 +301,9 @@
 	align-items: center;
 	gap: 8px;
 	padding: 0 14px;
-	border: 1px solid rgb(255 255 255 / 0.13);
+	border: 1px solid var(--garis-ruang);
 	border-radius: var(--r-control);
-	background: rgb(255 255 255 / 0.03);
+	background: var(--isi-ruang);
 	color: var(--ink-on-board-dim);
 	font-family: var(--f-display);
 	font-size: var(--text-sm);
@@ -311,7 +311,7 @@
 }
 .tbl-papan:hover {
 	color: var(--ink-on-board);
-	border-color: rgb(255 255 255 / 0.26);
+	border-color: var(--garis-ruang-kuat);
 }
 .tbl-papan-aktif {
 	border-color: var(--pin-brass);
@@ -551,7 +551,7 @@ button:hover > .lubang-pin {
 	font-family: var(--f-data);
 	font-size: var(--text-2xs);
 	letter-spacing: 0.06em;
-	color: #e6d3a8;
+	color: var(--warn-ink);
 }
 
 .kotak-bahaya {

@@ -33,3 +33,6 @@ vite.config.ts.timestamp-*
 
 # Dokumentasi internal, tidak ikut dipublikasikan
 /docs
+
+# Berkas kredensial akun contoh
+AKUN-CONTOH.txt

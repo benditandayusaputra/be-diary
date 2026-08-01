@@ -16,7 +16,8 @@
 		"lint": "svelte-check --tsconfig ./tsconfig.json",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"seed": "node scripts/seed-sample.mjs"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.62.1",

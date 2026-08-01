@@ -48,12 +48,13 @@ docker compose up -d db   # Postgres di port 5442
 
 | Bagian | Keadaan |
 |---|---|
-| Unit dan test vector kriptografi | 136 test hijau |
+| Unit, test vector kriptografi, dan kontras tema | 258 test hijau |
 | End-to-end (Playwright) | 19 skenario hijau, termasuk transfer dua perangkat, pemulihan 24 kata, dan rotasi kunci master |
 | TypeScript strict | 0 error (`noUncheckedIndexedAccess` aktif) |
 | Bundle `/read` | 0 KB JS khusus rute — halaman publik dirender server, tanpa kode kriptografi |
 | Bundle rute aplikasi | 2–11 KB gzip per rute di atas shell bersama |
 | libsodium WASM | dimuat lazy di Web Worker, tidak memblokir first paint |
+| Kontras | 5 tema x 2 mode lolos WCAG AA, diperiksa otomatis di tes |
 
 ## Perintah
 
@@ -68,6 +69,7 @@ docker compose up -d db   # Postgres di port 5442
 | `pnpm test:e2e` | End-to-end (Playwright) |
 | `pnpm db:generate` | Buat migrasi Drizzle dari skema |
 | `pnpm db:migrate` | Jalankan migrasi |
+| `pnpm seed` | Buat akun contoh berisi tulisan (butuh server dev jalan) |
 
 ## Arsitektur singkat
 

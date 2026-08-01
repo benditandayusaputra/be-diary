@@ -108,6 +108,13 @@
 		var(--tex-grain),
 		repeating-linear-gradient(0deg, transparent 0 27px, rgb(43 79 142 / 0.16) 27px 28px),
 		linear-gradient(90deg, transparent 0 40px, rgb(168 48 43 / 0.14) 40px 41px, transparent 41px);
+	/* Garis, isi, dan tinta peringatan di atas dinding ruangan. Nilainya ikut mode. */
+	--garis-ruang: rgb(255 255 255 / 0.13);
+	--garis-ruang-kuat: rgb(255 255 255 / 0.26);
+	--isi-ruang: rgb(255 255 255 / 0.03);
+	--isi-ruang-kuat: rgb(255 255 255 / 0.06);
+	--warn-ink: #e6d3a8;
+
 	--card-w: 184px;
 	--card-h: 204px;
 	--row-h: 238px;
@@ -125,8 +132,35 @@
 	--board-felt: #33413a;
 	--board-felt-hi: #405047;
 	--board-felt-lo: #26312b;
-	--ink-on-board: #dce4db;
-	--ink-on-board-dim: #93a197;
+	/* Dinding jadi terang, jadi tinta di atasnya harus gelap.
+	   Kontras terhadap #cfc7b6: 8.56:1 dan 4.90:1, keduanya lolos WCAG AA. */
+	--ink-on-board: #232c26;
+	--ink-on-board-dim: #48514a;
+	--garis-ruang: rgb(27 27 23 / 0.22);
+	--garis-ruang-kuat: rgb(27 27 23 / 0.42);
+	--isi-ruang: rgb(27 27 23 / 0.04);
+	--isi-ruang-kuat: rgb(27 27 23 / 0.08);
+	--warn-ink: #6b4d12;
+}
+
+/*
+ * Permukaan yang selalu gelap di kedua mode membawa tintanya sendiri.
+ * Tanpa ini, tinta ruangan yang gelap di mode siang akan hilang di atas
+ * papan flanel, meja kayu, dan tirai.
+ */
+.papan-flanel,
+.bingkai-kayu,
+.meja-kayu,
+.tirai,
+.panel-gelap {
+	--ink-on-board: #c7d2c7;
+	/* Dinaikkan dari #93a197: nilai lama gagal AA di atas felt tema Meja dan Buku tulis. */
+	--ink-on-board-dim: #a8b4aa;
+	--garis-ruang: rgb(255 255 255 / 0.13);
+	--garis-ruang-kuat: rgb(255 255 255 / 0.26);
+	--isi-ruang: rgb(255 255 255 / 0.03);
+	--isi-ruang-kuat: rgb(255 255 255 / 0.06);
+	--warn-ink: #e6d3a8;
 }
 
 /* ---------- Tema ---------- */
@@ -178,6 +212,9 @@
 }
 
 [data-theme='meja'] {
+	/* Kertas manila tema ini paling gelap, jadi tinta lembutnya digelapkan
+	   supaya tetap lolos AA (#4c4a3f hanya 3.56:1 di atas #c79c6a). */
+	--ink-soft: #3a382e;
 	--board-felt: #4c3826;
 	--board-felt-hi: #5e462f;
 	--board-felt-lo: #241a12;
@@ -214,7 +251,8 @@
 	--ink-soft: #4e9a5c;
 	--ink-faint: #3a6d44;
 	--ink-on-board: #7ee08d;
-	--ink-on-board-dim: #3e7f4e;
+	/* #3e7f4e hanya 4.22:1 di atas hitam pekat; dinaikkan supaya lolos AA. */
+	--ink-on-board-dim: #4a9660;
 	--accent: #1d5c2c;
 	--accent-hi: #2a7f3f;
 	--accent-ink: #d6ffdd;
