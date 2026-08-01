@@ -1,0 +1,42 @@
+<script lang="ts">
+	import '../../../app.css';
+	import { i18n } from '$lib/state/i18n.svelte.ts';
+
+	let { children } = $props();
+</script>
+
+<div class="ruangan">
+	<div class="shell" style="display:flex;flex-direction:column;gap:var(--s-5)">
+		<header style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+			<a
+				href="/read"
+				style="display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-on-board)"
+			>
+				<span
+					style="width:15px;height:15px;border-radius:var(--r-pin);background:radial-gradient(circle at 33% 27%, #F3DFAA 0%, #D9A845 32%, var(--pin-brass) 58%, #6E4A12 100%);box-shadow:1px 2px 0 rgb(0 0 0 / 0.3)"
+				></span>
+				<span class="t-judul t-lg">be-diary</span>
+			</a>
+			<nav style="margin-left:auto;display:flex;gap:var(--s-3);flex-wrap:wrap">
+				<a href="/privasi" class="tbl-papan" style="text-decoration:none">Privasi</a>
+				<a href="/app" class="tbl" style="text-decoration:none">Diary-ku</a>
+			</nav>
+		</header>
+
+		{@render children()}
+
+		<footer
+			style="margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid rgb(255 255 255 / 0.1);display:flex;flex-direction:column;gap:var(--s-3)"
+		>
+			<p
+				style="margin:0;max-width:62ch;font-family:var(--f-read);font-size:var(--text-sm);line-height:1.7;color:var(--ink-on-board-dim);text-wrap:pretty"
+			>
+				{i18n.t.publik.krisis}
+			</p>
+			<span class="t-data"
+				>Hanya tulisan yang sengaja diterbitkan penulisnya yang muncul di sini. Entri privat tetap
+				terenkripsi.</span
+			>
+		</footer>
+	</div>
+</div>

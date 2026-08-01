@@ -1,0 +1,35 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Tes
+/test-results
+/playwright-report
+/blob-report
+/.playwright
+
+# Penyimpanan lampiran lokal untuk self-host
+/.blobstore
+
+# Dokumentasi internal, tidak ikut dipublikasikan
+/docs
