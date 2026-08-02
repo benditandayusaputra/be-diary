@@ -1,0 +1,3 @@
+# Perubahan kriptografi butuh review dua maintainer
+/src/lib/crypto/        @maintainer1 @maintainer2
+/tests/crypto-vectors/  @maintainer1 @maintainer2

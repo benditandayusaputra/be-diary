@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /read
+Disallow: /app
+Disallow: /pengaturan
+Disallow: /api
