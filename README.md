@@ -49,8 +49,8 @@ docker compose up -d db   # Postgres di port 5442
 
 | Bagian | Keadaan |
 |---|---|
-| Unit, test vector kriptografi, dan kontras tema | 274 test hijau |
-| End-to-end (Playwright) | 28 skenario hijau, termasuk transfer dua perangkat, pemulihan 24 kata, rotasi kunci master, mulai dari nol, centang terverifikasi, dan pencarian feed publik |
+| Unit, test vector kriptografi, dan kontras tema | 317 test hijau |
+| End-to-end (Playwright) | 29 skenario hijau, termasuk transfer dua perangkat, pemulihan 24 kata, rotasi kunci master, mulai dari nol, centang terverifikasi, dan pencarian feed publik |
 | TypeScript strict | 0 error (`noUncheckedIndexedAccess` aktif) |
 | Bundle `/read` | 0 KB JS khusus rute — halaman publik dirender server, tanpa kode kriptografi |
 | Bundle rute aplikasi | 2–11 KB gzip per rute di atas shell bersama |

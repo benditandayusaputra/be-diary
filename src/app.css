@@ -553,6 +553,11 @@ button:hover > .lubang-pin {
 	letter-spacing: 0.06em;
 	color: var(--warn-ink);
 }
+/* Pita ini dipakai di kertas maupun di dinding ruangan. Kertas selalu terang di
+   mode mana pun, jadi ia membawa tintanya sendiri alih-alih ikut mode. */
+.kertas {
+	--warn-ink: var(--warn-ink-kertas);
+}
 
 /* background-color, bukan shorthand: shorthand menghapus kertasnya kalau
    kelas ini dipasang bareng .kertas, dan tinta gelap jadi jatuh ke papan. */

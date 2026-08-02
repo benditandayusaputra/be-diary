@@ -141,3 +141,27 @@ test('header keamanan terpasang', async ({ page }) => {
 	expect(h['x-frame-options']).toBe('DENY');
 	expect(h['cross-origin-opener-policy']).toBe('same-origin');
 });
+
+test('keterangan mood muncul saat kursor menyentuh, dan menetap setelah dipilih', async ({
+	page
+}) => {
+	await daftar(page);
+	await page.goto('/app/hari-ini');
+	await page.waitForURL(/\/app\/\d{4}\/\d{2}\/\d{2}/);
+
+	const grup = page.getByRole('group', { name: 'Mood' });
+	const keterangan = grup.locator('xpath=following-sibling::span[1]');
+	await expect(keterangan).toHaveText('Belum dipilih');
+
+	// Menyentuh saja sudah memberi keterangan, tanpa menunggu tooltip peramban.
+	await grup.getByRole('button', { name: 'Lega' }).hover();
+	await expect(keterangan).toHaveText('Lega');
+
+	await grup.getByRole('button', { name: 'Berat' }).hover();
+	await expect(keterangan).toHaveText('Berat');
+
+	// Setelah dipilih, keterangannya bertahan walau kursor pergi.
+	await grup.getByRole('button', { name: 'Berat' }).click();
+	await page.getByLabel('Isi tulisan').hover();
+	await expect(keterangan).toHaveText('Berat');
+});

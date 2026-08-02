@@ -69,6 +69,11 @@ const PASANGAN: Array<[string, string, string]> = [
 	['tinta lembut di bone', '--ink-soft', '--paper-bone'],
 	['tinta lembut di manila', '--ink-soft', '--paper-manila'],
 	['tinta lembut di buram', '--ink-soft', '--paper-buram'],
+	// Pita peringatan di kertas: dulu ikut mode, jadi tinta terang jatuh ke kertas terang.
+	['pita peringatan di bone', '--warn-ink-kertas', '--paper-bone'],
+	['pita peringatan di manila', '--warn-ink-kertas', '--paper-manila'],
+	['pita peringatan di buram', '--warn-ink-kertas', '--paper-buram'],
+	['pita peringatan di dinding', '--warn-ink', '--room-wall'],
 	['teks tombol utama', '--accent-ink', '--accent']
 ];
 

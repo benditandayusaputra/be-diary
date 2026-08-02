@@ -36,21 +36,35 @@ export async function ambilPosisi(): Promise<GeolocationPosition> {
 	});
 }
 
-export async function ambilCuaca(lat: number, lon: number): Promise<Cuaca | null> {
+export const URL_CUACA = 'https://api.open-meteo.com/v1/forecast';
+
+/**
+ * Cuaca tetap ditambahkan walau gagal diambil, jadi kegagalannya dikembalikan
+ * sebagai alasan — bukan null diam-diam seperti dulu, yang bikin cuaca hilang
+ * tanpa jejak waktu CSP memblokir permintaannya.
+ */
+export async function ambilCuaca(
+	lat: number,
+	lon: number
+): Promise<{ cuaca: Cuaca } | { alasan: string }> {
+	const url = `${URL_CUACA}?latitude=${lat.toFixed(2)}&longitude=${lon.toFixed(2)}&current=temperature_2m,weather_code`;
 	try {
-		const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(2)}&longitude=${lon.toFixed(2)}&current=temperature_2m,weather_code`;
 		const res = await fetch(url);
-		if (!res.ok) return null;
+		if (!res.ok) return { alasan: `Layanan cuaca menolak (${res.status})` };
 		const data = (await res.json()) as {
 			current?: { temperature_2m?: number; weather_code?: number };
 		};
-		if (data.current?.temperature_2m === undefined) return null;
+		if (data.current?.temperature_2m === undefined) {
+			return { alasan: 'Layanan cuaca tidak mengirim suhu' };
+		}
 		return {
-			code: data.current.weather_code ?? 0,
-			tempC: Math.round(data.current.temperature_2m)
+			cuaca: {
+				code: data.current.weather_code ?? 0,
+				tempC: Math.round(data.current.temperature_2m)
+			}
 		};
 	} catch {
-		return null;
+		return { alasan: 'Tidak bisa menghubungi layanan cuaca' };
 	}
 }
 

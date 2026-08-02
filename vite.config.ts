@@ -24,7 +24,10 @@ export default defineConfig({
 					'script-src': ['self', 'wasm-unsafe-eval'],
 					'style-src': ['self', 'unsafe-inline'],
 					'img-src': ['self', 'blob:', 'data:'],
-					'connect-src': ['self', 'blob:', 'data:'],
+					// open-meteo dipanggil langsung dari peramban, bukan lewat server kita,
+					// supaya koordinat pengguna tidak pernah lewat sini. Tanpa baris ini
+					// permintaannya diblokir CSP dan cuacanya diam-diam tidak pernah muncul.
+					'connect-src': ['self', 'blob:', 'data:', 'https://api.open-meteo.com'],
 					'font-src': ['self', 'data:'],
 					'worker-src': ['self', 'blob:'],
 					'manifest-src': ['self'],

@@ -19,12 +19,16 @@
 			const pos = await ambilPosisi();
 			const lat = bulatkanKoordinat(pos.coords.latitude);
 			const lon = bulatkanKoordinat(pos.coords.longitude);
-			const cuaca = await ambilCuaca(lat, lon);
+			const hasil = await ambilCuaca(lat, lon);
 			onubah({
 				location: { lat, lon, label: label.trim() || `${lat}, ${lon}` },
-				...(cuaca ? { weather: cuaca } : {})
+				...('cuaca' in hasil ? { weather: hasil.cuaca } : {})
 			});
-			toast.show('Lokasi dan cuaca ditambahkan. Keduanya ikut terenkripsi.');
+			toast.show(
+				'cuaca' in hasil
+					? 'Lokasi dan cuaca ditambahkan. Keduanya ikut terenkripsi.'
+					: `Lokasi ditambahkan, tapi cuacanya gagal diambil: ${hasil.alasan.toLowerCase()}.`
+			);
 		} catch (err) {
 			toast.bahaya((err as Error).message || 'Izin lokasi ditolak');
 		} finally {

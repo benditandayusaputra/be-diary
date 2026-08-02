@@ -114,6 +114,7 @@
 	--isi-ruang: rgb(255 255 255 / 0.03);
 	--isi-ruang-kuat: rgb(255 255 255 / 0.06);
 	--warn-ink: #e6d3a8;
+	--warn-ink-kertas: #6b4d12;
 	--centang-biru: #3d8fdd;
 
 	--card-w: 184px;
@@ -214,6 +215,7 @@
 }
 
 [data-theme='meja'] {
+	--warn-ink-kertas: #432f08;
 	/* Kertas manila tema ini paling gelap, jadi tinta lembutnya digelapkan
 	   supaya tetap lolos AA (#4c4a3f hanya 3.56:1 di atas #c79c6a). */
 	--ink-soft: #3a382e;
@@ -235,6 +237,8 @@
 }
 
 [data-theme='terminal'] {
+	--warn-ink: #d8b45c;
+	--warn-ink-kertas: #d8b45c;
 	--room-wall: #050505;
 	--room-wall-warm: #070707;
 	--room-glow: none;
