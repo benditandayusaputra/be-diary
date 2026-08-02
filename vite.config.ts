@@ -23,7 +23,8 @@ export default defineConfig({
 					'default-src': ['none'],
 					'script-src': ['self', 'wasm-unsafe-eval'],
 					'style-src': ['self', 'unsafe-inline'],
-					'img-src': ['self', 'blob:', 'data:'],
+					// Ubin peta baru diminta setelah pemiliknya menyetujui; lihat PetaLokasi.
+					'img-src': ['self', 'blob:', 'data:', 'https://tile.openstreetmap.org'],
 					// open-meteo dipanggil langsung dari peramban, bukan lewat server kita,
 					// supaya koordinat pengguna tidak pernah lewat sini. Tanpa baris ini
 					// permintaannya diblokir CSP dan cuacanya diam-diam tidak pernah muncul.

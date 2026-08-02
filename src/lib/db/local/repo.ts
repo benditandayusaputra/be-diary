@@ -82,8 +82,15 @@ export const entriesRepo = {
 	},
 
 	async save(entry: LocalEntry, markDirty = true) {
+		// rev dan baseRev milik mesin sync. Salinan yang dipegang layar bisa
+		// tertinggal kalau sinkronisasi berjalan di latar sementara pengguna
+		// mengetik; menuliskannya balik akan memundurkan rev dan memalsukan
+		// konflik terhadap versi server yang sebenarnya sudah sama.
+		const tersimpan = await localDb().entries.get(entry.id);
 		const next: LocalEntry = polos({
 			...entry,
+			rev: tersimpan?.rev ?? entry.rev,
+			baseRev: tersimpan?.baseRev ?? entry.baseRev,
 			updatedAt: new Date().toISOString(),
 			dirty: markDirty ? 1 : entry.dirty
 		});

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LocalEntry } from '$lib/db/local/types.ts';
+	import PetaLokasi from './PetaLokasi.svelte';
 	import { ukuranManusia } from '$lib/lampiran/gambar.ts';
 	import { waktuRelatif } from '$lib/utils/tanggal.ts';
 	import { i18n } from '$lib/state/i18n.svelte.ts';
@@ -35,6 +36,12 @@
 			{/each}
 		</div>
 	</div>
+
+	{#if entri.location}
+		<div style="padding-top:var(--s-2);border-top:1px solid rgb(27 27 23 / 0.14)">
+			<PetaLokasi lokasi={entri.location} cuaca={entri.weather} />
+		</div>
+	{/if}
 
 	<div
 		style="display:flex;flex-direction:column;gap:9px;padding-top:var(--s-2);border-top:1px solid rgb(27 27 23 / 0.14)"

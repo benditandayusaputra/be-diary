@@ -89,6 +89,22 @@
 				yang bisa dibaca — itu memang tujuannya. Persetujuannya eksplisit, tidak pernah otomatis,
 				dan entri privat asli tetap terenkripsi.
 			</p>
+			<h3>Dua layanan luar, keduanya kamu yang memulai</h3>
+			<p>
+				Tidak ada satu pun permintaan ke luar yang jalan sendiri saat kamu membaca atau menulis.
+				Hanya dua tombol yang menghubungi pihak lain, dan keduanya harus kamu tekan:
+			</p>
+			<p>
+				<strong>&ldquo;+ lokasi &amp; cuaca&rdquo;</strong> menanyakan cuaca ke open-meteo.com dari
+				peramban kamu langsung, bukan lewat server kami — jadi kami tidak pernah tahu kamu di mana.
+				Koordinat yang dikirim sudah dibulatkan ke sekitar satu kilometer.
+			</p>
+			<p>
+				<strong>&ldquo;Tampilkan peta&rdquo;</strong> mengambil gambar peta dari OpenStreetMap, yang
+				berarti mereka melihat koordinat itu. Peta tidak pernah dimuat sebelum kamu menyetujuinya
+				sekali, dan persetujuan itu disimpan di perangkatmu saja. Isi tulisannya sendiri tidak
+				pernah ikut.
+			</p>
 			<h3>Data yang kami simpan</h3>
 			<p>
 				Email, ciphertext, metadata di tabel atas, dan log akses selama 7 hari. Tidak ada analitik

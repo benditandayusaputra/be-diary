@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { URL_CUACA } from '$lib/utils/cuaca.ts';
+import { HOST_UBIN } from '$lib/utils/peta.ts';
 
 const konfig = readFileSync('vite.config.ts', 'utf8');
 
@@ -22,6 +23,17 @@ describe('CSP mengizinkan layanan yang benar-benar dipanggil peramban', () => {
 	it('connect-src tidak dibuka lebar-lebar', () => {
 		const nilai = daftarCsp('connect-src');
 		expect(nilai.length).toBeGreaterThan(0);
+		expect(nilai).not.toContain('*');
+		expect(nilai).not.toContain('https:');
+	});
+
+	// Ubin peta dimuat langsung sebagai <img> ke host OSM.
+	it('img-src memuat host ubin peta yang dipakai kode', () => {
+		expect(daftarCsp('img-src')).toContain(new URL(HOST_UBIN).origin);
+	});
+
+	it('img-src tidak dibuka lebar-lebar', () => {
+		const nilai = daftarCsp('img-src');
 		expect(nilai).not.toContain('*');
 		expect(nilai).not.toContain('https:');
 	});

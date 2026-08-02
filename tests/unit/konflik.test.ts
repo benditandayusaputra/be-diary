@@ -76,3 +76,68 @@ describe('resolusi konflik', () => {
 		expect(label).toBe('Versi dari Chrome di macOS, 21.04');
 	});
 });
+
+describe('gabung tidak boleh menjatuhkan konteks', () => {
+	const dasar = (p: Partial<LocalEntry> = {}): LocalEntry =>
+		({
+			id: 'e1',
+			entryDate: '2026-08-02',
+			title: 'Judul',
+			body: 'Isi tulisan',
+			mood: 3,
+			tags: [],
+			weather: null,
+			location: null,
+			attachments: [],
+			createdAt: '2026-08-02T10:00:00.000Z',
+			updatedAt: '2026-08-02T10:00:00.000Z',
+			rev: 0,
+			baseRev: 0,
+			dirty: 1,
+			deletedAt: null,
+			conflictOf: null,
+			conflictLabel: null,
+			publicId: null,
+			...p
+		}) as LocalEntry;
+
+	const LOKASI = { lat: -6.23, lon: 106.86, label: 'Jakarta' };
+	const CUACA = { code: 61, tempC: 29 };
+
+	// Dulu `...server` menimpa keduanya, dan dirty=0 membuat hilangnya permanen.
+	it('membawa lokasi dan cuaca dari sisi lokal saat server belum punya', () => {
+		const hasil = coba(dasar({ location: LOKASI, weather: CUACA }), dasar({ rev: 5 }));
+		expect(hasil.jenis).toBe('gabung');
+		if (hasil.jenis !== 'gabung') return;
+		expect(hasil.hasil.location).toEqual(LOKASI);
+		expect(hasil.hasil.weather).toEqual(CUACA);
+	});
+
+	it('menandai kotor supaya konteks yang baru ikut terkirim balik', () => {
+		const hasil = coba(dasar({ location: LOKASI }), dasar({ rev: 5 }));
+		if (hasil.jenis !== 'gabung') throw new Error('harusnya gabung');
+		expect(hasil.hasil.dirty).toBe(1);
+	});
+
+	it('tidak menandai kotor kalau memang tidak ada yang berubah', () => {
+		const sama = { location: LOKASI, weather: CUACA, mood: 3, tags: ['a'] };
+		const hasil = coba(dasar(sama), dasar({ ...sama, rev: 5 }));
+		if (hasil.jenis !== 'gabung') throw new Error('harusnya gabung');
+		expect(hasil.hasil.dirty).toBe(0);
+	});
+
+	it('mempertahankan lokasi server kalau lokal tidak punya', () => {
+		const hasil = coba(dasar(), dasar({ location: LOKASI, rev: 5 }));
+		if (hasil.jenis !== 'gabung') throw new Error('harusnya gabung');
+		expect(hasil.hasil.location).toEqual(LOKASI);
+		expect(hasil.hasil.dirty).toBe(0);
+	});
+
+	// Lampiran baru di sisi lokal juga harus memicu kiriman balik.
+	it('menandai kotor kalau lampiran lokal belum ada di server', () => {
+		const lampiran = [{ id: 'a1', kind: 'image', name: 'f.png', mime: 'image/png', size: 10 }];
+		const hasil = coba(dasar({ attachments: lampiran } as Partial<LocalEntry>), dasar({ rev: 5 }));
+		if (hasil.jenis !== 'gabung') throw new Error('harusnya gabung');
+		expect(hasil.hasil.dirty).toBe(1);
+	});
+});

@@ -155,3 +155,51 @@ test('cron pengingat menolak permintaan tanpa secret kalau diset', async ({ requ
 	const res = await request.get('/api/cron/pengingat');
 	expect([200, 403]).toContain(res.status());
 });
+
+test('peta lokasi tidak menghubungi pihak ketiga sebelum disetujui', async ({ browser }) => {
+	const ctx = await browser.newContext({
+		locale: 'id-ID',
+		permissions: ['geolocation'],
+		geolocation: { latitude: -6.2312, longitude: 106.8619 }
+	});
+	const page = await ctx.newPage();
+	await daftar(page);
+
+	// Catat setiap permintaan yang keluar dari localhost.
+	const keLuar: string[] = [];
+	page.on('request', (r) => {
+		if (!r.url().includes('localhost')) keLuar.push(r.url());
+	});
+
+	await page.goto('/app/hari-ini');
+	await page.waitForURL(/\/app\/\d{4}\/\d{2}\/\d{2}/);
+	// Tanpa membuang query-nya, halaman ini membuka editor kosong yang baru.
+	const alamatHari = new URL(page.url()).pathname;
+	await page.getByLabel('Isi tulisan').fill(`Catatan berlokasi ${unik()}`);
+	await page.getByRole('button', { name: '+ lokasi & cuaca' }).click();
+
+	// Koordinatnya muncul sebagai cip begitu lokasi tersemat.
+	await expect(page.getByText(/-6\.23, 106\.86/).first()).toBeVisible({ timeout: 60_000 });
+
+	await page.getByRole('button', { name: 'Tancapkan ke papan' }).click();
+	await page.waitForURL(/\/app\/\d{4}\/\d{2}$/, { timeout: 30_000 });
+	await page.goto(alamatHari);
+
+	// Petanya masih tertutup, jadi belum ada satu ubin pun yang diminta.
+	await expect(page.getByRole('button', { name: 'Tampilkan peta' })).toBeVisible({
+		timeout: 30_000
+	});
+	expect(keLuar.filter((u) => u.includes('tile.openstreetmap.org'))).toHaveLength(0);
+
+	await page.getByRole('button', { name: 'Tampilkan peta' }).click();
+	await expect(page.getByRole('link', { name: /Buka .* di peta penuh/ })).toBeVisible({
+		timeout: 30_000
+	});
+
+	// Persetujuannya diingat, jadi tidak ditanya lagi tiap membuka tulisan.
+	await page.reload();
+	await expect(page.getByRole('link', { name: /Buka .* di peta penuh/ })).toBeVisible({
+		timeout: 30_000
+	});
+	await expect(page.getByRole('button', { name: 'Tampilkan peta' })).toHaveCount(0);
+});
